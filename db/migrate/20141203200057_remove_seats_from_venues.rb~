@@ -1,0 +1,4 @@
+class RemoveSeatsFromVenues < ActiveRecord::Migration
+  def change
+  end
+end
