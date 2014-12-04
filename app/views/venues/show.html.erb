@@ -7,27 +7,15 @@ $(document).ready(function() {
     $total = $('#total'),
     sc = $('#seat-map').seatCharts({
 	map: [
-	    'ff_ff',
-	    'ff_ff',
-	    'ee_ee',
-	    'ee_ee',
-	    'ee___',
-	    'ee_ee',
-	    'ee_ee',
-	    'ee_ee',
-	    'eeeee',
-	],
+	    'fffff',
+	    'fffff',
+	],n
 	seats: {
 	    f: {
 		price   : 100,
 		classes : 'first-class', //your custom CSS class
 		category: 'First Class'
 	    },
-	    e: {
-		price   : 40,
-		classes : 'economy-class', //your custom CSS class
-		category: 'Economy Class'
-	    }					
 	    
 	},
 	naming : {
@@ -35,14 +23,6 @@ $(document).ready(function() {
 	    getLabel : function (character, row, column) {
 		return firstSeatLabel++;
 	    },
-	},
-	legend : {
-	    node : $('#legend'),
-	    items : [
-		[ 'f', 'available',   'First Class' ],
-		[ 'e', 'available',   'Economy Class'],
-		[ 'f', 'unavailable', 'Already Booked']
-	    ]					
 	},
 	click: function () {
 	    if (this.status() == 'available') {
@@ -89,7 +69,7 @@ $(document).ready(function() {
     });
 
     //let's pretend some seats have already been booked
-    sc.get(['1_2', '4_1', '7_1', '7_2']).status('unavailable');
+    sc.get(['7_1', '7_2']).status('unavailable');
     
 });
 
@@ -123,7 +103,6 @@ function recalculateTotal(sc) {
       <ul id="selected-seats"></ul>
         Total: <b>$<span id="total">0</span></b>
         <button class="checkout-button">Checkout &raquo;</button>
-        <div id="legend"></div>
     </div>
   </div>
 </div>
