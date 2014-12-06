@@ -13,11 +13,21 @@ Venue.create!(
 
 v = Venue.first
 
+Event.create!(
+              name: "Ted Talks",
+              time: Time.now,
+              venue: v
+              )
+
+e = Event.first
+
 counter = 1
 10.times do
   Seat.create!(
                seat_number: counter,
-               venue: v
+               available: true,
+               venue: v,
+               event: e
                )
   counter += 1
 end

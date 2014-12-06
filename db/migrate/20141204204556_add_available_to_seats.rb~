@@ -1,0 +1,5 @@
+class AddAvailableToSeats < ActiveRecord::Migration
+  def change
+    add_columns :seats, :available, :boolean
+  end
+end

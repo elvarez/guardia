@@ -1,0 +1,4 @@
+class AddEventToSeats < ActiveRecord::Migration
+  def change
+  end
+end

@@ -3,13 +3,14 @@
 
 $(document).ready(function() {
     var $cart = $('#selected-seats'),
+    $input = $('#seat'),
     $counter = $('#counter'),
     $total = $('#total'),
     sc = $('#seat-map').seatCharts({
 	map: [
 	    'fffff',
 	    'fffff',
-	],n
+	],
 	seats: {
 	    f: {
 		price   : 100,
@@ -27,11 +28,12 @@ $(document).ready(function() {
 	click: function () {
 	    if (this.status() == 'available') {
 		//let's create a new <li> which we'll add to the cart items
-		$('<li>'+this.data().category+' Seat # '+this.settings.label+': <b>$'+this.data().price+'</b> <a href="#" class="cancel-cart-item">[cancel]</a></li>')
+		$('<li>'+this.settings.label+'</b> </li>')
 		    .attr('id', 'cart-item-'+this.settings.id)
 		    .data('seatId', this.settings.id)
 		    .appendTo($cart);
-		
+
+		$input.val( $input.val() + this.settings.label);
 		/*
 		 * Lets update the counter and total
 		 *
@@ -102,7 +104,12 @@ function recalculateTotal(sc) {
 
       <ul id="selected-seats"></ul>
         Total: <b>$<span id="total">0</span></b>
-        <button class="checkout-button">Checkout &raquo;</button>
+
+        <%= form_tag({controller: "reservations", action: "create"}, method: "post", class: "reservation-form") do %>
+          <%= text_field_tag(:seat) %>
+          <%= submit_tag("Confirm") %>
+        <% end %>
+
     </div>
   </div>
 </div>
