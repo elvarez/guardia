@@ -1,0 +1,9 @@
+Select Show
+</br>
+
+<% @events.each do |e| %>
+
+<%= link_to "#{e.name} @ #{e.time}", e %>
+</br>
+
+<% end %>
