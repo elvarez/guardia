@@ -3,7 +3,7 @@
 
 $(document).ready(function() {
     var $cart = $('#selected-seats'),
-    $input = $('#seat'),
+    $input = $('#reservation_seat_id'),
     $counter = $('#counter'),
     $total = $('#total'),
     sc = $('#seat-map').seatCharts({
@@ -89,25 +89,26 @@ function recalculateTotal(sc) {
 
 
 
+      <h2><%= @event.name %></h2>
+
 <div class="wrapper">
   <div class="container">
     <div id="seat-map">
-      <div class="front-indicator">Front</div>
+      <div class="front-indicator"></div>
     
       </div>
   
     <div class="booking-details">
   
-      <h2>Booking Details</h2>
     
       <h3> Selected Seats (<span id="counter">0</span>):</h3>
 
       <ul id="selected-seats"></ul>
         Total: <b>$<span id="total">0</span></b>
 
-        <%= form_tag({controller: "reservations", action: "create"}, method: "post", class: "reservation-form") do %>
-          <%= text_field_tag(:seat) %>
-          <%= submit_tag("Confirm") %>
+        <%= form_for [@event, @reservation] do |f|%>
+          <%= f.text_field :seat_id %>
+          <%= f.submit "Confirm" %>
         <% end %>
 
     </div>
