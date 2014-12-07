@@ -17,11 +17,12 @@ class ReservationsController < ApplicationController
 
   def new
     @event = Event.find(params[:event_id])
+    @allres = @event.reservations.all
     @reservation = Reservation.new
   end
 
   def reservation_params
-    params.require(:reservation).permit(:seat_id)
+    params.require(:reservation).permit(:seat_id, :seat_row, :seat_col)
   end
   
 end

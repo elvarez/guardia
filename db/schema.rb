@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141207011138) do
+ActiveRecord::Schema.define(version: 20141207040945) do
 
   create_table "clients", force: true do |t|
     t.string   "name"
@@ -33,6 +33,8 @@ ActiveRecord::Schema.define(version: 20141207011138) do
     t.datetime "updated_at"
     t.integer  "seat_id"
     t.integer  "user_id"
+    t.integer  "seat_col"
+    t.integer  "seat_row"
   end
 
   create_table "users", force: true do |t|
