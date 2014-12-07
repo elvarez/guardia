@@ -1,8 +1,17 @@
 class ReservationsController < ApplicationController
 
   def create
-    
-    
+
+    @reservation = false
+
+    if @reservation = false
+      flash[:notice] = "Reserved!"
+      redirect_to '/'
+    else
+      flash[:error] = "Not there yet"
+      redirect_to '/'
+    end
+
   end
 
 
