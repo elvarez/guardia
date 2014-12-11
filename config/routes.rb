@@ -5,6 +5,6 @@ Rails.application.routes.draw do
 
   
   resources :events do
-    resources :reservations, only: [:index, :new, :create]
+    resources :orders
   end
 end

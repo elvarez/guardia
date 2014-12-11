@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141207040945) do
+ActiveRecord::Schema.define(version: 20141211221850) do
 
   create_table "clients", force: true do |t|
     t.string   "name"
@@ -27,15 +27,29 @@ ActiveRecord::Schema.define(version: 20141207040945) do
     t.integer  "max_seats"
   end
 
-  create_table "reservations", force: true do |t|
-    t.integer  "event_id"
+  create_table "orders", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "seat_id"
-    t.integer  "user_id"
-    t.integer  "seat_col"
-    t.integer  "seat_row"
+    t.integer  "event_id",   default: 0, null: false
   end
+
+  create_table "reservations", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+    t.integer  "order_id",   default: 0, null: false
+  end
+
+  create_table "seats", force: true do |t|
+    t.integer  "reservation_id"
+    t.integer  "seat_id",        null: false
+    t.integer  "seat_col",       null: false
+    t.integer  "seat_row",       null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "seats", ["reservation_id"], name: "index_seats_on_reservation_id"
 
   create_table "users", force: true do |t|
     t.string   "name"
