@@ -78,7 +78,7 @@ $(document).ready(function() {
     //let's pretend some seats have already been booked
 
     <% @allres.each do |r| %>
-	sc.get(['<%= "#{r.seat_row}_#{r.seat_col}" %>']).status('unavailable');
+	    sc.get(['<%= "#{r.seat_row}_#{r.seat_col}" %>']).status('unavailable');
     <% end %>
     });
 

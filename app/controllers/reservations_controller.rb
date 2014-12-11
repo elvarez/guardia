@@ -17,7 +17,7 @@ class ReservationsController < ApplicationController
 
   def new
     @event = Event.find(params[:event_id])
-    @allres = @event.reservations.all
+    @allres = @event.reservations
     @reservation = Reservation.new
   end
 

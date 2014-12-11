@@ -3,7 +3,7 @@ Select Show
 
 <% @events.each do |e| %>
 
-<%= link_to "#{e.name} @ #{e.time}", e %>
+<%= link_to "#{e.name} @ #{formatted_time(e.time)}", e %>
 </br>
 
 <% end %>
