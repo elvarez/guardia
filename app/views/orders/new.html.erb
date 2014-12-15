@@ -3,9 +3,9 @@
 
 $(document).ready(function() {
     var $cart = $('#selected-seats'),
-    $input = $('#reservation_seat_id'),
-    $inputrow = $('#reservation_seat_row'),
-    $inputcol = $('#reservation_seat_col'),    
+    $input = $('#order_reservation_seat_id'),
+    $inputrow = $('#order_reservation_seat_row'),
+    $inputcol = $('#order_reservation_seat_col'),    
     $counter = $('#counter'),
     $total = $('#total'),
     sc = $('#seat-map').seatCharts({
@@ -38,6 +38,7 @@ $(document).ready(function() {
     $input.val( $input.val() + this.settings.label);
     $inputrow.val( $inputrow.val() + (this.settings.row + 1));
     $inputcol.val( $inputcol.val() + (this.settings.column + 1));
+    // $('#new_order').
     
     /*
      * Lets update the counter and total
@@ -106,7 +107,6 @@ function recalculateTotal(sc) {
       </div>
   
     <div class="booking-details">
-  
     
       <h3> Selected Seats (<span id="counter">0</span>):</h3>
 
@@ -114,7 +114,14 @@ function recalculateTotal(sc) {
         Total: <b>$<span id="total">0</span></b>
 
         <%= form_for [@event, @order] do |f|%>
-        <%= f.submit "Confirm" %>
+          <%= f.fields_for @order.reservations.build do |builder| %>
+            <%= builder.hidden_field :event_id, value: @event.id %>
+            <%= builder.hidden_field :user_id, value: current_user.id %>
+            <%= builder.hidden_field :seat_id %>
+            <%= builder.hidden_field :seat_col %>
+            <%= builder.hidden_field :seat_row %>
+          <% end %>
+          <%= f.submit "Confirm" %>
         <% end %>
 
     </div>

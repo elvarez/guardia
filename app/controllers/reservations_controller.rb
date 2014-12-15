@@ -1,14 +1,14 @@
 class ReservationsController < ApplicationController
 
-  def create
+  before_action :set_order, only: [:create]
 
-    @event = Event.find(params[:event_id])
+  def create
     @reservation = current_user.reservations.build(reservation_params)
     @reservation.event = @event
     
     if @reservation.save
       flash[:notice] = "Reserved!"
-      redirect_to '/'
+      redirect_to @order
     else
       flash[:error] = "Not there yet"
       redirect_to '/'

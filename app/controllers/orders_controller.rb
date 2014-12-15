@@ -1,11 +1,18 @@
 class OrdersController < ApplicationController
 
+  def new
+    @event = Event.find(params[:event_id])
+    @order = current_user.orders.build
+    @order.reservations.build
+    @allres = @event.reservations
+  end
+
   def create
     @event = Event.find(params[:event_id])
-    @reservation = current_user.reservations.build(reservation_params)
-    @reservation.event = @event
+    @order = current_user.orders.build(order_params)
+    @order.event = @event
     
-    if @reservation.save
+    if @order.save
       flash[:notice] = "Reserved!"
       redirect_to '/'
     else
@@ -14,10 +21,10 @@ class OrdersController < ApplicationController
     end
   end
 
-  def new
-    @event = Event.find(params[:event_id])
-    @allres = @event.reservations
-    @reservation = Reservation.new
+  private
+
+  def order_params
+    params.require(:order).permit()
   end
 
 end

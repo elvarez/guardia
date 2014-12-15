@@ -1,3 +1,4 @@
 class Event < ActiveRecord::Base
-  has_many :reservations, dependent: :destroy
+  has_many :orders, dependent: :destroy
+  has_many :reservations, through: :orders, dependent: :destroy
 end
