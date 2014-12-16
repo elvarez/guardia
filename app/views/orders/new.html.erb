@@ -1,27 +1,25 @@
-<%= render 'seat_charts' %>
+<div class="js-seat-charts">
+  <%= render 'seat_charts' %>
+</div>
 
 <h2><%= @event.name %></h2>
-
 <div class="wrapper">
   <div class="container">
     <div id="seat-map">
       <div class="front-indicator"></div>
-    
       </div>
   
     <div class="booking-details">
-    
       <h3> Selected Seats (<span id="counter">0</span>):</h3>
-
       <ul id="selected-seats"></ul>
-        Total: <b>$<span id="total">0</span></b>
+      Total: <b>$<span id="total">0</span></b>
     </div>
-
-    <%= form_for [@event, @order] do |f|%>
-      <%= f.fields_for :reservations do |builder| %>
-        <%= render 'reservations_fields', f: builder %>
-      <% end %>
-      <%= f.submit "Confirm" %>
-    <% end %>
   </div>
+
+  <%= form_for [@event, @order] do |f|%>
+    <%= f.fields_for :reservations do |builder| %>
+      <%= render 'reservations_fields', f: builder %>
+    <% end %>
+    <%= f.submit "Confirm" %>
+  <% end %>
 </div>

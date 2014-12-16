@@ -24,7 +24,8 @@ class OrdersController < ApplicationController
   private
 
   def order_params
-    params.require(:order).permit()
+    params.require(:order)
+      .permit(:event, :user, reservations_attributes: [:seat_id, :seat_col, :seat_row])
   end
 
 end

@@ -3,9 +3,6 @@
 
 $(document).ready(function() {
     var $cart = $('#selected-seats'),
-    $input = $('#order_reservation_seat_id'),
-    $inputrow = $('#order_reservation_seat_row'),
-    $inputcol = $('#order_reservation_seat_col'),    
     $counter = $('#counter'),
     $total = $('#total'),
     sc = $('#seat-map').seatCharts({
@@ -35,10 +32,47 @@ $(document).ready(function() {
         .data('seatId', this.settings.id)
         .appendTo($cart);
 
-    $input.val( $input.val() + this.settings.label);
-    $inputrow.val( $inputrow.val() + (this.settings.row + 1));
-    $inputcol.val( $inputcol.val() + (this.settings.column + 1));
-    
+
+    $resNum = parseInt($('#counter').html());
+    $seatId = $('#order_reservations_attributes_' +
+      $resNum + '_seat_id');
+    $seatRow = $('#order_reservations_attributes_' +
+      $resNum + '_seat_row');
+    $seatCol = $('#order_reservations_attributes_' +
+      $resNum + '_seat_col');
+
+    $seatId.val(this.settings.label);
+    $seatRow.val(this.settings.row + 1);
+    $seatCol.val(this.settings.column + 1);
+
+
+    // duplicate nested form
+    if ($('.duplicatable_nested_form').length) {
+      nestedForm = $('.duplicatable_nested_form').last().clone();
+      lastNestedForm = $('.duplicatable_nested_form').last();
+      newNestedForm = $(nestedForm).clone();
+      formsOnPage = $('.duplicatable_nested_form').length;
+
+      $(newNestedForm).find('label').each(function() {
+        var newLabel, oldLabel;
+        oldLabel = $(this).attr('for');
+        newLabel = oldLabel.replace(new RegExp(/_[0-9]+_/), "_" + formsOnPage + "_");
+        return $(this).attr('for', newLabel);
+      });
+
+      $(newNestedForm).find('select, input').each(function() {
+        var newId, newName, oldId, oldName;
+        oldId = $(this).attr('id');
+        newId = oldId.replace(new RegExp(/_[0-9]+_/), "_" + formsOnPage + "_");
+        $(this).attr('id', newId);
+        oldName = $(this).attr('name');
+        newName = oldName.replace(new RegExp(/\[[0-9]+\]/), "[" + formsOnPage + "]");
+        return $(this).attr('name', newName);
+      });
+
+      $(newNestedForm).insertAfter(lastNestedForm);
+    }
+
     /*
      * Lets update the counter and total
      *
