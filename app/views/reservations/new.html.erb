@@ -1,11 +1,12 @@
 <script>
+
     var firstSeatLabel = 1;
 
 $(document).ready(function() {
     var $cart = $('#selected-seats'),
     $input = $('#reservation_seat_id'),
     $inputrow = $('#reservation_seat_row'),
-    $inputcol = $('#reservation_seat_col'),    
+    $inputcol = $('#reservation_seat_col'),
     $counter = $('#counter'),
     $total = $('#total'),
     sc = $('#seat-map').seatCharts({
@@ -35,9 +36,12 @@ $(document).ready(function() {
 		    .data('seatId', this.settings.id)
 		    .appendTo($cart);
 
-		$input.val( $input.val() + this.settings.label);
-		$inputrow.val( $inputrow.val() + (this.settings.row + 1));
-		$inputcol.val( $inputcol.val() + (this.settings.column + 1));
+		$input.val( this.settings.label);
+		$inputrow.val( this.settings.row + 1);
+		$inputcol.val( this.settings.column + 1);
+
+		$(".add_fields")[0].click();
+
 		
 		/*
 		 * Lets update the counter and total
@@ -57,6 +61,11 @@ $(document).ready(function() {
 		
 		//remove the item from our cart
 		$('#cart-item-'+this.settings.id).remove();
+
+		$input.val( $input.val() - this.settings.label);
+		$inputrow.val( $inputrow.val() - (this.settings.row + 1));
+		$inputcol.val( $inputcol.val() - (this.settings.column + 1));		
+		
 		
 		//seat has been vacated
 		return 'available';
@@ -69,11 +78,25 @@ $(document).ready(function() {
 	}
     });
 
+
+  $("#items").bind("cocoon:after-insert", function(e, added_item) {
+    added_item.find(".seat-input").val($("#reservation_seat_id").val());
+  });
+
+  $("#items").bind("cocoon:after-insert", function(e, added_item) {
+    added_item.find(".row-input").val($("#reservation_seat_row").val());
+  });
+
+  $("#items").bind("cocoon:after-insert", function(e, added_item) {
+    added_item.find(".col-input").val($("#reservation_seat_col").val());
+  });
+
     //this will handle "[cancel]" link clicks
     $('#selected-seats').on('click', '.cancel-cart-item', function () {
 	//let's just trigger Click event on the appropriate seat, so we don't have to repeat the logic here
 	sc.get($(this).parents('li:first').data('seatId')).click();
     });
+    
 
     //let's pretend some seats have already been booked
 
@@ -92,9 +115,8 @@ function recalculateTotal(sc) {
     
     return total;
 }
+
 </script>
-
-
 
       <h2><%= @event.name %></h2>
 
@@ -106,20 +128,20 @@ function recalculateTotal(sc) {
       </div>
   
     <div class="booking-details">
-  
-    
-      <h3> Selected Seats (<span id="counter">0</span>):</h3>
+      <h3> Select one seat (<span id="counter">0</span>)!</h3>
 
       <ul id="selected-seats"></ul>
         Total: <b>$<span id="total">0</span></b>
 
-        <%= form_for [@event, @reservation] do |f|%>
-          <%= f.text_field :seat_id %>
-          <%= f.text_field :seat_row %>
-          <%= f.text_field :seat_col %>
-          <%= f.submit "Confirm" %>
-        <% end %>
+<%= text_field_tag "reservation_seat_id" %>
+<%= text_field_tag "reservation_seat_row" %>
+<%= text_field_tag "reservation_seat_col" %>
 
+    <div class="container">
+      <div id="items">
+      <%= render "form" %>
+      </div>
+    </div>
     </div>
   </div>
 </div>

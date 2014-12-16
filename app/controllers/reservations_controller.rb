@@ -3,7 +3,7 @@ class ReservationsController < ApplicationController
   def create
 
     @event = Event.find(params[:event_id])
-    @reservation = current_user.reservations.build(reservation_params)
+    @reservation = current_user.reservations.create(reservation_params)
     @reservation.event = @event
     
     if @reservation.save
@@ -18,7 +18,7 @@ class ReservationsController < ApplicationController
   def new
     @event = Event.find(params[:event_id])
     @allres = @event.reservations.all
-    @reservation = Reservation.new
+    @reservation = @event.reservations.build
   end
 
   def reservation_params
