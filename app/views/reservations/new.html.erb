@@ -62,11 +62,15 @@ $(document).ready(function() {
 		//remove the item from our cart
 		$('#cart-item-'+this.settings.id).remove();
 
-		$input.val( $input.val() - this.settings.label);
-		$inputrow.val( $inputrow.val() - (this.settings.row + 1));
-		$inputcol.val( $inputcol.val() - (this.settings.column + 1));		
-		
-		
+		//remove from input boxes
+		$input.val('');
+		$inputrow.val('');
+		$inputcol.val('');		
+
+		//activate cocoon
+		$('#remove'+this.settings.label)[0].click();
+
+
 		//seat has been vacated
 		return 'available';
 	    } else if (this.status() == 'unavailable') {
@@ -81,6 +85,7 @@ $(document).ready(function() {
 
   $("#items").bind("cocoon:after-insert", function(e, added_item) {
     added_item.find(".seat-input").val($("#reservation_seat_id").val());
+    added_item.find(".remove_fields").attr('id', 'remove'+$("#reservation_seat_id").val());
   });
 
   $("#items").bind("cocoon:after-insert", function(e, added_item) {
@@ -90,6 +95,7 @@ $(document).ready(function() {
   $("#items").bind("cocoon:after-insert", function(e, added_item) {
     added_item.find(".col-input").val($("#reservation_seat_col").val());
   });
+
 
     //this will handle "[cancel]" link clicks
     $('#selected-seats').on('click', '.cancel-cart-item', function () {
@@ -128,14 +134,14 @@ function recalculateTotal(sc) {
       </div>
   
     <div class="booking-details">
-      <h3> Select one seat (<span id="counter">0</span>)!</h3>
+      <h3> Select multiple seats (<span id="counter">0</span>)!</h3>
 
       <ul id="selected-seats"></ul>
         Total: <b>$<span id="total">0</span></b>
 
-<%= text_field_tag "reservation_seat_id" %>
-<%= text_field_tag "reservation_seat_row" %>
-<%= text_field_tag "reservation_seat_col" %>
+<%= hidden_field_tag "reservation_seat_id" %>
+<%= hidden_field_tag "reservation_seat_row" %>
+<%= hidden_field_tag "reservation_seat_col" %>
 
     <div class="container">
       <div id="items">
