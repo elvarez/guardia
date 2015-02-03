@@ -1,6 +1,6 @@
 <%= form_for @event do |f| %>
+  <%= f.submit "Confirm", id: "button"  %>
 <div class="links">
   <%= link_to_add_association( "Add seat", f, :reservations, { :style => 'visibility:hidden;' } )%>
 </div>
-  <%= f.submit "Confirm", id: "button"  %>
 <% end %>

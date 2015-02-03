@@ -1,7 +1,6 @@
 class ReservationsController < ApplicationController
 
   def create
-
     @event = Event.find(params[:event_id])
     @reservation = current_user.reservations.create(reservation_params)
     @reservation.event = @event

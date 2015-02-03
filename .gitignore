@@ -17,7 +17,7 @@
 
 /ideas.org
 
-
+/config/initializers/paypal.rb
 
 # -*- mode: gitignore; -*-
 *~

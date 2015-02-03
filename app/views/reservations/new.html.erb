@@ -28,6 +28,18 @@ $(document).ready(function() {
 		return firstSeatLabel++;
 	    },
 	},
+	focus  : function() {
+
+	    if (this.status() == 'available') {
+		//if seat's available, it can be focused
+		$("#"+this.settings.label+"")[0].click();
+		return 'focused';
+		
+	    } else  {
+		//otherwise nothing changes
+		return this.style();
+	    }
+	},
 	click: function () {
 	    if (this.status() == 'available') {
 		//let's create a new <li> which we'll add to the cart items
@@ -41,7 +53,6 @@ $(document).ready(function() {
 		$inputcol.val( this.settings.column + 1);
 
 		$(".add_fields")[0].click();
-
 		
 		/*
 		 * Lets update the counter and total
@@ -96,6 +107,10 @@ $(document).ready(function() {
     added_item.find(".col-input").val($("#reservation_seat_col").val());
   });
 
+  $("button").click(function(){
+      var imgUrl = $(this).attr('rel');
+      $("#area").html("<img src='" + imgUrl + "' alt='description' />");
+  });
 
     //this will handle "[cancel]" link clicks
     $('#selected-seats').on('click', '.cancel-cart-item', function () {
@@ -124,30 +139,53 @@ function recalculateTotal(sc) {
 
 </script>
 
-      <h2><%= @event.name %></h2>
+<h2><%= @event.name %></h2>
 
 <div class="wrapper">
   <div class="container">
-    <div id="seat-map">
-      <div class="front-indicator"></div>
-    
+      <div class="nine columns">
+	<div class="container">
+	  <div class="row">
+	    <div class="five columns alpha">
+	      <div id="seat-map">
+		<div class="front-indicator"></div>
+	      </div>
+	      
+	      <div class="booking-details">
+		<h4> Select multiple seats (<span id="counter">0</span>)!</h4>
+		Total: <b>$<span id="total">0</span></b>
+		</br>
+		Seats: <ul id="selected-seats"></ul>
+
+		<div class="container">
+		  <div id="items">
+		    <%= render "form" %>
+		  </div>
+		</div>
+		<%= hidden_field_tag "reservation_seat_id" %>
+		<%= hidden_field_tag "reservation_seat_row" %>
+		<%= hidden_field_tag "reservation_seat_col" %>
+	      </div>
+	    </div>
+	    <div class="four columns omega">
+	      <div id="area"></div>
+	    </div>
+	  </div>
+	</div>
       </div>
-  
-    <div class="booking-details">
-      <h3> Select multiple seats (<span id="counter">0</span>)!</h3>
-
-      <ul id="selected-seats"></ul>
-        Total: <b>$<span id="total">0</span></b>
-
-<%= hidden_field_tag "reservation_seat_id" %>
-<%= hidden_field_tag "reservation_seat_row" %>
-<%= hidden_field_tag "reservation_seat_col" %>
-
-    <div class="container">
-      <div id="items">
-      <%= render "form" %>
-      </div>
-    </div>
-    </div>
   </div>
+
+
+  <button id="1" rel="/assets/food/1.png" style="display: none;">Click!</button>
+  <button id="2" rel="/assets/food/2.png" style="display: none;">Click!</button>
+  <button id="3" rel="/assets/food/3.png" style="display: none;">Click!</button>
+  <button id="4" rel="/assets/food/4.png" style="display: none;">Click!</button>
+  <button id="5" rel="/assets/food/5.png" style="display: none;">Click!</button>
+  <button id="6" rel="/assets/food/6.png" style="display: none;">Click!</button>
+  <button id="7" rel="/assets/food/7.png" style="display: none;">Click!</button>
+  <button id="8" rel="/assets/food/8.png" style="display: none;">Click!</button>
+  <button id="9" rel="/assets/food/9.png" style="display: none;">Click!</button>
+  <button id="10" rel="/assets/food/10.png" style="display: none;">Click!</button>
+
+
 </div>

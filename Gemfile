@@ -21,6 +21,9 @@ gem 'turbolinks'
 #cocoon
 gem 'cocoon'
 
+#paypal
+
+gem 'paypal-recurring'
 
 # devise
 gem 'devise'
