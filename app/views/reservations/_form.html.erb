@@ -1,6 +1,69 @@
-<%= form_for @event do |f| %>
-  <%= f.submit "Confirm", id: "button"  %>
-<div class="links">
-  <%= link_to_add_association( "Add seat", f, :reservations, { :style => 'visibility:hidden;' } )%>
-</div>
+<script>
+$(document).ready(function() {
+  var subscription;
+
+  jQuery(function() {
+    Stripe.setPublishableKey($('meta[name="stripe-key"]').attr('content'));
+    return subscription.setupForm();
+  });
+
+  subscription = {
+    setupForm: function() {
+      return $('#edit_event_<%= @event.id %>').submit(function() {
+        $('input[type=submit]').attr('disabled', true);
+        if ($('#card_number').length) {
+          subscription.processCard();
+          return false;
+        } else {
+          return true;
+        }
+      });
+    },
+    processCard: function() {
+      var card;
+      card = {
+        number: $('#card_number').val(),
+        cvc: $('#card_code').val(),
+        expMonth: $('#card_month').val(),
+        expYear: $('#card_year').val()
+      };
+      return Stripe.createToken(card, subscription.handleStripeResponse);
+    },
+    handleStripeResponse: function(status, response) {
+      console.log(status);
+      console.log(response);
+      if (status === 200) {
+        $('#stripe_card_token').val(response.id);
+        return $('#edit_event_<%= @event.id %>')[0].submit();
+      } else {
+        $('#stripe_error').text(response.error.message);
+        return $('input[type=submit]').attr('disabled', false);
+      }
+    }
+  };
+})
+</script>
+
+
+<%= form_for @event, html: { name: "edevent" } do |f| %>
+  <%= f.submit "Confirm", id: "button" %>
+  <%= hidden_field_tag :stripe_card_token %>
+
+  <div class="field">
+    <%= label_tag :card_number, "Credit Card Number" %>
+    <%= text_field_tag :card_number, nil, name: nil %>
+  </div>
+  <div class="field">
+    <%= label_tag :card_code, "Security Code on Card (CVV)" %>
+    <%= text_field_tag :card_code, nil, name: nil %>
+  </div>
+  <div class="field">
+    <%= label_tag :card_month, "Card Expiration" %>
+    <%= select_month nil, {add_month_numbers: true}, {name: nil, id: "card_month"} %>
+    <%= select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card_year"} %>
+  </div>
+
+  <div class="links">
+    <%= link_to_add_association( "Add seat", f, :reservations, { :style => 'visibility:hidden;' } )%>
+  </div>
 <% end %>

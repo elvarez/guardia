@@ -1,17 +1,14 @@
 class ReservationsController < ApplicationController
 
   def create
-    @event = Event.find(params[:event_id])
-    @reservation = current_user.reservations.create(reservation_params)
-    @reservation.event = @event
-    
-    if @reservation.save
-      flash[:notice] = "Reserved!"
-      redirect_to '/'
-    else
-      flash[:error] = "Not there yet"
-      redirect_to '/'
-    end
+      @event = Event.find(params[:event_id])
+      @reservation = current_user.reservations.create(reservation_params)
+      @reservation.event = @event
+      if @reservation.save
+        flash[:notice] = "Reserved!"
+      else
+        flash[:notice] = "Failure"
+      end
   end
 
   def new

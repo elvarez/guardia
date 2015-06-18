@@ -9,14 +9,23 @@ class EventsController < ApplicationController
   end
 
   def update
-    @event = Event.find(params[:id])
-    
-    if @event.update_attributes(events_params)
-      flash[:notice] = "Event updated"
-      redirect_to @event
+    token = params[:stripe_card_token]
+    if charge = Stripe::Charge.create(
+                                      :amount => 1000,
+                                      :currency => "chf",
+                                      :source => token,
+                                      :description => "example"
+                                      )
+      @event = Event.find(params[:id])
+      if @event.update_attributes(events_params)
+        flash[:notice] = "Event updated"
+        redirect_to @event
+      else
+        flash[:error] = "Error updating event"
+        render :action => 'index'
+      end
     else
-      flash[:error] = "Error updating event"
-      render :action => 'index'
+      redirect_to new_event_reservation_path
     end
   end
 
