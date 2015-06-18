@@ -17,6 +17,8 @@
 
 /ideas.org
 
+/config/initializers/stripe.rb
+
 /config/initializers/paypal.rb
 
 # -*- mode: gitignore; -*-

@@ -22,8 +22,10 @@ gem 'turbolinks'
 gem 'cocoon'
 
 #paypal
-
 gem 'paypal-recurring'
+
+#stripe
+gem 'stripe'
 
 # devise
 gem 'devise'
