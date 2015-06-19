@@ -39,8 +39,9 @@ class EventsController < ApplicationController
 
   def update
     token = params[:stripe_card_token]
+    amount = params[:number].to_i*100
     if charge = Stripe::Charge.create(
-                                      :amount => 1000,
+                                      :amount => amount,
                                       :currency => "chf",
                                       :source => token,
                                       :description => "example"
@@ -64,6 +65,6 @@ class EventsController < ApplicationController
   end
 
   def new_params
-    params.require(:event).permit(:name, :time)
+    params.require(:event).permit(:name, :time, :description, :price)
   end
 end

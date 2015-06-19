@@ -1,3 +1,5 @@
-<%= @event.name %>
-</br>
+<h1><%= @event.name %></h1>
+<p>Date: <%= @event.time %></p>
+<p>Price: <%= @event.price %></p>
+<p><%= @event.description %></p>
 <%= link_to "Make a reservation!", new_event_reservation_path(@event) %>

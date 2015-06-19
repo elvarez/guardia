@@ -48,6 +48,7 @@ $(document).ready(function() {
 <%= form_for @event, html: { name: "edevent" } do |f| %>
   <%= f.submit "Confirm", id: "button" %>
   <%= hidden_field_tag :stripe_card_token %>
+  <%= hidden_field_tag :number %>
 
   <div class="field">
     <%= label_tag :card_number, "Credit Card Number" %>
