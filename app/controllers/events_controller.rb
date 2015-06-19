@@ -2,10 +2,12 @@ class EventsController < ApplicationController
 
   def new
     @event = Event.new
+    authorize @event
   end
 
   def destroy
     @event = Event.find(params[:id])
+    authorize @event
     if @event.destroy
       flash[:notice] = "destruction!"
       redirect_to events_path
@@ -17,6 +19,7 @@ class EventsController < ApplicationController
   
   def create
     @event = Event.new(new_params)
+    authorize @event
     if @event.save
       flash[:notice] = "created!"
       redirect_to @event
@@ -43,6 +46,7 @@ class EventsController < ApplicationController
                                       :description => "example"
                                       )
       @event = Event.find(params[:id])
+      authorize @event
       if @event.update_attributes(events_params)
         flash[:notice] = "Event updated"
         redirect_to @event

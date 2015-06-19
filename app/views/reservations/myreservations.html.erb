@@ -1,3 +1,5 @@
+<% if current_user %>
+
 <% myevents = Array.new %>
 <% current_user.reservations.each do |r| %>
   <% myevents << r.event_id %>
@@ -20,3 +22,4 @@
 <% end %>
 
 
+<% end %>

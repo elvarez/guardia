@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   has_many :reservations, dependent: :destroy
 
   def admin?
-    role == admin
+    role == 'admin'
   end
   
 end

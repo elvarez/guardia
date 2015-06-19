@@ -2,8 +2,13 @@ Select Show
 </br>
 
 <% @events.each do |e| %>
+  <%= link_to "#{e.name} @ #{e.time}", e %>
+  <% if policy(e).destroy? %>
+    <%= link_to "delete", e, method: :delete %>
+  <% end %>
+  </br>
+<% end %>
 
-<%= link_to "#{e.name} @ #{e.time}", e %> <%= link_to "delete", e, method: :delete %>
-</br>
-
+<% if policy(Event.new).create? %>
+  <%= link_to "New event", new_event_path %>
 <% end %>
