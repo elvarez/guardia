@@ -1,9 +1,20 @@
 <script>
-
     var firstSeatLabel = 1;
 
 $(document).ready(function() {
 
+$("#cardform").hide();
+$("#pay").click(function(){
+    $("#seat-map").hide();
+    $("#hideme").hide();
+    $("#cardform").show();
+});
+$("#return").click(function(){
+    $("#seat-map").show();
+    $("#hideme").show();
+    $("#cardform").hide();
+});
+    
     var $cart = $('#selected-seats'),
     $input = $('#reservation_seat_id'),
     $inputrow = $('#reservation_seat_row'),
@@ -159,19 +170,25 @@ function recalculateTotal(sc) {
 		Total: <b>$<span id="total">0</span></b>
 		</br>
 		Seats: <ul id="selected-seats"></ul>
-
-		<div class="container">
-		  <div id="items">
-		    <%= render "form" %>
-		  </div>
+		<div id="hideme">
+  	          <input type="button" id="pay" value="pay">
 		</div>
 		<%= hidden_field_tag "reservation_seat_id" %>
 		<%= hidden_field_tag "reservation_seat_row" %>
 		<%= hidden_field_tag "reservation_seat_col" %>
 	      </div>
 	    </div>
+
 	    <div class="four columns omega">
 	      <div id="area"></div>
+	    </div>
+
+	  </div>
+	  <div class="row">
+	    <div class="container">
+	      <div id="items">
+	        <%= render "form" %>
+	      </div>
 	    </div>
 	  </div>
 	</div>
