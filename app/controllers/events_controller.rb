@@ -1,5 +1,31 @@
 class EventsController < ApplicationController
 
+  def new
+    @event = Event.new
+  end
+
+  def destroy
+    @event = Event.find(params[:id])
+    if @event.destroy
+      flash[:notice] = "destruction!"
+      redirect_to events_path
+    else
+      flash[:notice] = "error destroying"
+      render 'index'
+    end
+  end
+  
+  def create
+    @event = Event.new(new_params)
+    if @event.save
+      flash[:notice] = "created!"
+      redirect_to @event
+    else
+      flash[:notice] = "error creating"
+      render 'index'
+    end
+  end
+  
   def index
     @events = Event.all
   end
@@ -33,4 +59,7 @@ class EventsController < ApplicationController
     params.require(:event).permit(reservations_attributes: [:seat_id, :seat_col, :seat_row, :user_id])   
   end
 
+  def new_params
+    params.require(:event).permit(:name, :time)
+  end
 end

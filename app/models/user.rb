@@ -5,5 +5,9 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :reservations, dependent: :destroy
+
+  def admin?
+    role == admin
+  end
   
 end

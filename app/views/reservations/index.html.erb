@@ -1,0 +1,10 @@
+<% @events.each do |e| %>
+  <%= e.name %>
+  </br>
+  <% e.reservations.each do |r| %>
+    Seat <%= r.seat_id %>, <%= @users.find(r.user_id).name %>
+    </br>
+  <% end %>
+  Revenue: <%= e.reservations.count*10 %>
+  </br>
+<% end %>

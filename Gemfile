@@ -21,6 +21,9 @@ gem 'turbolinks'
 #cocoon
 gem 'cocoon'
 
+#pundit
+gem 'pundit'
+
 #paypal
 gem 'paypal-recurring'
 
@@ -29,6 +32,9 @@ gem 'stripe'
 
 # devise
 gem 'devise'
+
+# foundation date
+gem 'foundation-datetimepicker-rails'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'

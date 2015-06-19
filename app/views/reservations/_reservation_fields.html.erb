@@ -3,6 +3,7 @@
     <%= f.hidden_field :seat_id, class: "seat-input" %>
     <%= f.hidden_field :seat_row, class: "row-input"  %>
     <%= f.hidden_field :seat_col, class: "col-input" %>
+    <%= f.hidden_field :user_id, :value => current_user.id, class: "uid-input" %>
   </p>
   <%= link_to_remove_association("remove", f, { :style => 'visibility:hidden;'  })%>  
 </div>

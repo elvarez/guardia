@@ -1,0 +1,28 @@
+<script>
+$(document).ready(function() {
+  $("#bb").click(function(){
+    var n = Number( $("#columns").val() );
+    var nr = Number( $("#rows").val() );
+    var str = Array(n).join("f");
+    var arr = [];
+    for (var i = 0; i<nr; i++) {
+      arr.push(str);
+    }
+    $("#map").val( arr );
+  });
+});
+</script>
+
+<div id="makemap">
+
+  <%= text_field_tag(:rows) %>
+  <%= text_field_tag(:columns) %>
+
+  <input type="button" id="bb">
+
+  <%= form_tag({controller: "events", action: "new"}) do %>
+    <%= text_field_tag(:map) %>
+    <%= submit_tag("new map") %>
+  <% end %>
+
+</div>

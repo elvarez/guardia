@@ -1,0 +1,16 @@
+<script type="text/javascript">
+$(document).ready(function(){
+    $('.fdatepicker').fdatepicker({
+      format: 'yyyy-mm-dd'
+    });
+  });
+</script>
+
+New Event
+
+<%= form_for @event do |f|%>
+  <%= f.text_field :name %>
+  <%= f.text_field :time, class: "fdatepicker" %>
+  <%= f.submit "New" %>
+<% end %>
+

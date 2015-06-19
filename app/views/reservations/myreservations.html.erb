@@ -1,0 +1,22 @@
+<% myevents = Array.new %>
+<% current_user.reservations.each do |r| %>
+  <% myevents << r.event_id %>
+<% end %>
+
+<% myevents = myevents.uniq %>
+<% eventcounter = myevents.count - 1 %>
+
+<% for i in 0..eventcounter %>
+  </br>
+  <%= @events.find(myevents[i]).name %>
+  </br>
+  <% current_user.reservations.each do |r| %>
+    <% if myevents[i] == r.event_id %>
+      Seat <%= r.seat_id %>
+      </br>
+    <% else %>
+    <% end %>
+  <% end %>
+<% end %>
+
+
