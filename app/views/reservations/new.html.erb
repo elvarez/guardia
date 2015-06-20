@@ -4,14 +4,17 @@
 $(document).ready(function() {
 
 $("#cardform").hide();
+$("#showme").hide();
 $("#pay").click(function(){
-    $("#seat-map").hide();
+    $("#map-pic").hide();
+    $("#showme").show();    
     $("#hideme").hide();
     $("#cardform").show();
 });
 $("#return").click(function(){
-    $("#seat-map").show();
+    $("#map-pic").show();
     $("#hideme").show();
+    $("#showme").hide();    
     $("#cardform").hide();
 });
     
@@ -153,48 +156,68 @@ function recalculateTotal(sc) {
 
 </script>
 
-<h2><%= @event.name %></h2>
-
-<div class="wrapper">
+<div class="wrapper" id="map-pic">
+  </br>
   <div class="container">
-      <div class="nine columns">
+      <div class="twelve columns offset-by-two">
 	<div class="container">
 	  <div class="row">
-	    <div class="five columns alpha">
+	    <div class="seven columns alpha">
 	      <div id="seat-map">
-		<div class="front-indicator"></div>
-	      </div>
-	      
-	      <div class="booking-details">
-		<h4> Select multiple seats (<span id="counter">0</span>)!</h4>
-		Total: <b>$<span id="total">0</span></b>
-		</br>
-		Seats: <ul id="selected-seats"></ul>
-		<div id="hideme">
-  	          <input type="button" id="pay" value="pay">
-		</div>
-		<%= hidden_field_tag "reservation_seat_id" %>
-		<%= hidden_field_tag "reservation_seat_row" %>
-		<%= hidden_field_tag "reservation_seat_col" %>
-	      </div>
+		<div class="front-indicator">Front</div>
+	      </div>	      
 	    </div>
 
-	    <div class="four columns omega">
+	    <div class="five columns omega">
 	      <div id="area"></div>
 	    </div>
 
 	  </div>
-	  <div class="row">
-	    <div class="container">
-	      <div id="items">
-	        <%= render "form" %>
-	      </div>
-	    </div>
-	  </div>
+
 	</div>
       </div>
   </div>
+</div>
+</br>
+<div class="container">
+  <div class="six columns offset-by-five">
+    <div id="selectres">
+      <div class="row">
+	<section>
+	Reserved seat numbers:
+	<ul id="selected-seats"></ul>
+	</section>
+      </div>
+      <div class="row">
+	<p>
+	Total for <span id="counter">0</span> seats: <b>$<span id="total">0</span></b>
+	</p>
+      </div>
+      <div class="row">
+	<div id="hideme">
+	  <center>
+  	    <input type="button" id="pay" value="Checkout">
+	  </center>
+	</div>
+	<div id="showme">
+	  <center>
+	    <input type="button" id="return" value="Go back">
+	  </center>
+	</div>
+      </div>
+    </div>
+  </div>
+</div>
 
+  <%= hidden_field_tag "reservation_seat_id" %>
+  <%= hidden_field_tag "reservation_seat_row" %>
+  <%= hidden_field_tag "reservation_seat_col" %>
+</br>
+<div class="container">
+  <div id="items">
+    <%= render "form" %>
+  </div>
+</div>
 
   <button id="1" rel="/assets/food/1.png" style="display: none;">Click!</button>
   <button id="2" rel="/assets/food/2.png" style="display: none;">Click!</button>
@@ -208,4 +231,3 @@ function recalculateTotal(sc) {
   <button id="10" rel="/assets/food/10.png" style="display: none;">Click!</button>
 
   
-</div>

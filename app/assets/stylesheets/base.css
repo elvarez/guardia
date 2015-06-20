@@ -153,7 +153,7 @@
 	    margin:0;
  }
 	.button:hover, button:hover, input[type="submit"]:hover, input[type="reset"]:hover, input[type="button"]:hover {
-	    background:#0483c3;
+	    background:#363434;
 }
 
 	.button:active, button:active, input[type="submit"]:active, input[type="reset"]:active,	input[type="button"]:active {
@@ -184,16 +184,16 @@
 	textarea,
 	select {
 		border: 1px solid #ccc;
-		padding: 0.75em 1em;
+		padding: 0.5em 0.5em;
 		outline: none;
 		border-radius: 8px;
-		font: 1.2em "Lato", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+		font: 1em "Lato", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
 		color: #777;
 		margin: 0;
 		width: 90%;
 		max-width: 100%;
 		display: block;
-		margin-bottom: 20px;
+		margin-bottom: 10px;
 		background: #fff; }
 	select {
 		padding: 0; }
@@ -403,3 +403,80 @@
 	#listborder {
 	    border-bottom: 1px solid #3E3939;
 	}
+
+/* seat map */
+
+	#area {
+	    height: 250px;
+	    width: 250px;
+	    }
+
+	#map-pic {
+	    background:#292323;
+	    }
+
+	.front-indicator {
+	width: 145px;
+	margin: 2px 32px 10px 32px;
+	background-color: #544F4F;	
+	color: #B5B5B5;
+	text-align: center;
+	padding: 3px;
+	border-radius: 5px;
+	}
+
+/* reservation */
+	#selectres {
+	    background:#3D3D3D;
+	    color:#d3d3d3;
+	    border: 2px solid #7F7F7F;
+	    border-radius: 4px;
+	    }
+
+	#selectres section {
+	    margin-left: 2em;
+	    margin-top: 1em;
+	}
+
+	#selectres p {
+	    margin-left: 2em;
+	    margin-bottom: 0;
+	}
+
+	#pay {
+	    font-size: 12px;
+	    text-transform: none;
+	}
+	#return {
+	    font-size: 12px;
+	    text-transform: none;
+	}
+	
+	#selected-seats {
+	    display: inline;
+	    list-style: none;
+	}
+
+	#selected-seats li {
+	    display: inline;
+	}
+
+	#selected-seats li:after {
+	    content: ", ";
+	}
+
+/* reservation */
+
+	#cardform select {
+	    display: inline;
+	    width:100px;
+	    }
+	.cardcode {
+	    width:100px;
+	    }
+	#button {
+	    background-color: #CCCCCC;
+	    color:#666666;
+	    font-size: 14px;
+	    text-transform: none;
+	    }

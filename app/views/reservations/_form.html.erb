@@ -44,29 +44,30 @@ $(document).ready(function() {
 })
 </script>
 
-<div id="cardform">
-<input type="button" id="return" value="go back">
-<%= form_for @event, html: { name: "edevent" } do |f| %>
-  <%= f.submit "Confirm", id: "button" %>
-  <%= hidden_field_tag :stripe_card_token %>
-  <%= hidden_field_tag :number %>
-  <div class="field">
-    <%= label_tag :card_number, "Credit Card Number" %>
-    <%= text_field_tag :card_number, nil, name: nil %>
-  </div>
-  <div class="field">
-    <%= label_tag :card_code, "Security Code on Card (CVV)" %>
-    <%= text_field_tag :card_code, nil, name: nil %>
-  </div>
-  <div class="field">
-    <%= label_tag :card_month, "Card Expiration" %>
-    <%= select_month nil, {add_month_numbers: true}, {name: nil, id: "card_month"} %>
-    <%= select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card_year"} %>
-  </div>
-</div
 
-  
-  <div class="links">
-    <%= link_to_add_association( "Add seat", f, :reservations, { :style => 'visibility:hidden;' } )%>
+<div class="container">
+  <div class="four columns offset-by-six">
+    <div id="cardform">
+      <%= form_for @event, html: { name: "edevent" } do |f| %>
+      <%= hidden_field_tag :stripe_card_token %>
+      <%= hidden_field_tag :number %>
+      <div>
+	<%= text_field_tag :card_number, nil, name: nil, placeholder: "Credit Card Number"%>
+      </div>
+      <div>
+	<%= select_month nil, {add_month_numbers: true}, {name: nil, id: "card_month"} %>
+	<%= select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card_year"} %>
+      </div>
+      <div class="cardcode">
+	<%= text_field_tag :card_code, nil, name: nil, placeholder: "CVC" %>
+      </div>
+      <center>
+      <%= f.submit "Confirm", id: "button" %>
+      </center>      
+      <div class="links">
+	<%= link_to_add_association( "Add seat", f, :reservations, { :style => 'visibility:hidden;' } )%>
+      </div>
+      <% end %>      
+    </div>
   </div>
-<% end %>
+</div>
