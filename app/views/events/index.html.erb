@@ -1,14 +1,39 @@
-Select Show
-</br>
-
-<% @events.each do |e| %>
-  <%= link_to "#{e.name} @ #{e.time}", e %>
-  <% if policy(e).destroy? %>
-    <%= link_to "delete", e, method: :delete %>
-  <% end %>
+<div id="eventlist" class="wrapper">
   </br>
+  <div class="container">
+    <div class="eight columns offset-by-four">
+      
+      <div class="container">
+<% @events.each do |e| %>
+	<div class="row">
+	  <div class="one column">
+    <p><%= e.time.strftime("%b").upcase %></p>
+    <span><%= e.time.strftime("%d") %></span>
+	  </div>
+	  <div class="five columns">
+    <h5><%= e.name %></h5>
+    <p><%= e.description[0,40]%>...</p>    
+	  </div>
+          <div class="two columns">
+	    <%= button_to "MORE", e, method: :get %>
+	  </div>
+	</div>
+	<div class="row">
+	  <div class="eight columns" id="listborder">
+	  </div>
+	</div>
 <% end %>
+      </div>
+      
+    </div>
+  </div>
 
-<% if policy(Event.new).create? %>
-  <%= link_to "New event", new_event_path %>
-<% end %>
+  <div>
+    <center>
+	  <% if policy(Event.new).create? %>
+	  <%= button_to "New event", new_event_path, method: :get %>
+	  <% end %>
+    </center>
+    </br>
+  </div>
+</div>
