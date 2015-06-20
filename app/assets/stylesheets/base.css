@@ -416,7 +416,7 @@
 	    }
 
 	.front-indicator {
-	width: 145px;
+	width: 270px;
 	margin: 2px 32px 10px 32px;
 	background-color: #544F4F;	
 	color: #B5B5B5;
@@ -480,3 +480,31 @@
 	    font-size: 14px;
 	    text-transform: none;
 	    }
+/* event show */
+
+	#evdescription {
+	    background:#292323;
+    	    color:#A6A4A4;
+	    font-size:14px;
+	    }
+	#evmakeres {
+	    color:#E1717D;
+	    }
+	#evmakeres h1 {
+	    color:#E1717D;
+	    }
+
+	#evmakeres p {
+	    font-size:16px;
+	    }
+	
+	#evmakeres a{
+	    color:#E1717D;
+	    }
+	
+/* about */
+	#about p{
+	    color:#E1717D;
+	    font-size:16px;	    
+	    }
+	    

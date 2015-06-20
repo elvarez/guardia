@@ -1,5 +1,27 @@
-<h1><%= @event.name %></h1>
-<p>Date: <%= @event.time %></p>
-<p>Price: <%= @event.price %></p>
-<p><%= @event.description %></p>
-<%= link_to "Make a reservation!", new_event_reservation_path(@event) %>
+<div class="wrapper" id="evdescription">
+  </br>
+  <div class="container">
+      <div class="twelve columns offset-by-two">
+	  <p><%= @event.description %></p>
+	<center>
+	  <p>Price: <%= @event.price %></p>
+	</center>
+      </div>
+  </div>
+</div>
+
+<div class="wrapper" id="evmakeres">
+  </br>
+  <div class="container">
+    <div class="six columns offset-by-five">
+      <div id="evtitle">
+        <center>
+	  <h1><%= @event.name %></h1>
+  	  <p><%= @event.time.strftime("%B %d, %Y") %></p>
+	  <%= link_to "Reserve", new_event_reservation_path(@event) %>
+        </center>
+	</br>
+      </div>
+    </div>
+  </div>
+</div>
