@@ -507,4 +507,34 @@
 	    color:#E1717D;
 	    font-size:16px;	    
 	    }
+
+/* reservation list */
+	#results {
+	    background:white;
+	    color:#5C5C5C;
+	}
+
+	#results p{
+	    margin:0;
+	    color:#C61A32;
+	}
+
+	#nomarginrow {
+	    margin-bottom: 0;
+	}
+
+	#reslistborder {
+	    border-bottom: 1px solid #C2C2C2;
+	    margin-bottom: 0;
+	}
+
+/* login */
+
+	#login {
+	    background:#3D3D3D;
+	    color:#d3d3d3;
+	    border: 2px solid #7F7F7F;
+	    border-radius: 4px;
+	    padding:1em;
+	    }	    
 	    
